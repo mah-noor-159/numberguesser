@@ -17,54 +17,70 @@ const msge = document.getElementById('message');
 minNum.textContent = min;
 maxNum.textContent = max;
 
+
+// play again event listener
+// game.addEventListener('mousedown',function(e){
+//     if(e.target.className=== 'Play-Again') {
+//         window.document.reload()
+//     }
+
+
+
+    
+// })
+
 // listen for guess
 guessBtn.addEventListener('click', function () {
-    let guess = parseInt(guessInput.value);
-    // console.log(guess);
-
-    //   validate
-    if (isNaN(guess) || guess < min || guess > max) {
-        setMessage(`Please enter a number between ${min} and ${max}`, 'red');
-    }
-
-
-    // check if won
-    if (guess === winningNum) {
-
-        gameOver(true, `${winningNum} is correct , YOU WIN!!`)
-        // // disabled input
-        // guessInput.disabled=true;
-        // //  change input border color
-        // guessInput.style.borderColor='green';
-        // // set message
-        // setMessage(`${winningNum} is correct , YOU WIN!!`,'green');
+    
+    if (guessBtn.value === 'Play Again') {
+        location.reload()
     } else {
-        // wrong number
-        guessesLeft -= 1;
-
-
-        if (guessesLeft === 0) {
-
-            gameOver(false, `GameOver, you lost. The correct number was  ${winningNum}`)
-            // GameOver,you lost
-
-            guessInput.disabled = true;
-            //  change input border color
-            guessInput.style.borderColor = 'red';
-            // set message
-            setMessage(`GameOver, you lost. The correct number was  ${winningNum}`, 'red')
+        let guess = parseInt(guessInput.value);
+        // console.log(guess);
+    
+        //   validate
+        if (isNaN(guess) || guess < min || guess > max) {
+            setMessage(`Please enter a number between ${min} and ${max}`, 'red');
+        }
+    
+    
+        // check if won
+        if (guess === winningNum) {
+    
+            gameOver(true, `${winningNum} is correct , YOU WIN!!`)
+            // // disabled input
+            // guessInput.disabled=true;
+            // //  change input border color
+            // guessInput.style.borderColor='green';
+            // // set message
+            // setMessage(`${winningNum} is correct , YOU WIN!!`,'green');
         } else {
-
-            //  change input border color
-            guessInput.style.borderColor = 'red';
-
-            // clear text
-            guessInput.value = '';
-            // Game continues , answer wrong!
-            setMessage(`${guess} is not correct, ${guessesLeft} guesses left!`, 'red')
+            // wrong number
+            guessesLeft -= 1;
+    
+    
+            if (guessesLeft === 0) {
+    
+                gameOver(false, `GameOver, you lost. The correct number was  ${winningNum}`)
+                // GameOver,you lost
+    
+                guessInput.disabled = true;
+                //  change input border color
+                guessInput.style.borderColor = 'red';
+                // set message
+                setMessage(`GameOver, you lost. The correct number was  ${winningNum}`, 'red')
+            } else {
+    
+                //  change input border color
+                guessInput.style.borderColor = 'red';
+    
+                // clear text
+                guessInput.value = '';
+                // Game continues , answer wrong!
+                setMessage(`${guess} is not correct, ${guessesLeft} guesses left!`, 'red')
+            }
         }
     }
-
 
 });
 
@@ -86,7 +102,9 @@ function gameOver(won, msg) {
 
     // play Again?
     guessBtn.value='Play Again';
-    guessBtn.className+= 'play-Again';
+    guessBtn.classList.add( 'Play-Again','p-2')
+
+   
 }
 
 
